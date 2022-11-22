@@ -19,7 +19,7 @@ const config: Options = {
   },
   seeder: {
     path: 'dist/seeders',
-    pathTs: 'src/seeders',
+    // pathTs: 'src/seeders',
   },
 };
 
