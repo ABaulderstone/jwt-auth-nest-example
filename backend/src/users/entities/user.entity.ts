@@ -3,7 +3,7 @@ import { BaseEntity } from 'src/shared/base.entity';
 
 @Entity({ tableName: 'users' })
 export class User extends BaseEntity {
-  @Property()
+  @Property({ unique: true })
   email: string;
 
   @Property()
