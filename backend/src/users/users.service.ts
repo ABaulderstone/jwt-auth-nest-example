@@ -1,11 +1,29 @@
+import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
+import BaseRepository from 'src/shared/base.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import { Option } from 'fp-ts/lib/Option';
+import * as O from 'fp-ts/lib/Option';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: BaseRepository<User>,
+  ) {}
+
+  async findByEmail(email: string): Promise<Option<User>> {
+    const user = await this.userRepository.findOne({ email });
+    return O.fromNullable(user);
+  }
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = plainToClass(User, createUserDto);
+    await this.userRepository.persistAndFlush(newUser);
+    return newUser;
   }
 
   findAll() {
