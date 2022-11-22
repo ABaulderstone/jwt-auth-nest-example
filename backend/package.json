@@ -30,6 +30,7 @@
     "@mikro-orm/mysql": "^5.5.3",
     "@mikro-orm/nestjs": "^5.1.2",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/mapped-types": "*",
